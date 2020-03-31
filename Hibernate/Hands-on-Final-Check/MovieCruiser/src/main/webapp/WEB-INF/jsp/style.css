@@ -1,0 +1,35 @@
+body{    
+    font-family: 'Courier New', Courier, monospace;
+    background-color: white;
+}
+
+/* - ADMIN CSS - */
+
+.heading{
+    font-size: 20px;
+    font-weight: bold;
+    color: steelblue;    
+    background-color: white;
+}
+
+section th p{
+    background-color: white;
+}
+
+section table tr{
+    background-color: white;
+}
+
+.title-column,.title-row{
+    text-align: left;
+}
+table th{
+    font-weight: bold;
+    text-align: center;
+}
+table td{
+    color: gray;
+    text-align: center;
+}
+
+/* - CUSTOMER CSS - */
