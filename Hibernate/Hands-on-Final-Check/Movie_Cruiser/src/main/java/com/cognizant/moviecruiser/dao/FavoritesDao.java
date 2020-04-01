@@ -18,6 +18,7 @@ public interface FavoritesDao extends CrudRepository<Favorites,String> {
 	@Query("select f.mv_id from Favorites f where us_id=?1")
 	public List<Integer> getAllFavoritesMovies(int userId) throws FavoritesEmptyException;
 //
-	@Query("delete from faivorite f where f.us_id = ?1 and f.mv_id =?2")
-	public void removeFavoritesMovie(int userId, int movieId);
+	@Modifying
+	@Query("delete from Favorites f where f.us_id=?1 and f.mv_id=?2")
+    public void removeFavoritesMovie(int userId, int movieId);
 }

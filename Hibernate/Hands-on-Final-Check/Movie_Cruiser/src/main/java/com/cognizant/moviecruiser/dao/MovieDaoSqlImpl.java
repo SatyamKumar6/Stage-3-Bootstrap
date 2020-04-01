@@ -38,14 +38,14 @@ public class MovieDaoSqlImpl {
 		movie1.setGenre(movie.getGenre());
 		movie1.setHasTeaser(movie.isHasTeaser());
 		
-		moviedao.save(movie1);
+	moviedao.save(movie1);
 
 	}
-
-	@Transactional
-	public Movie getMovie(long movieId) {
-		Movie movie = moviedao.getMovie(movieId);
-		return movie;
-	}
+//
+//	@Transactional
+//	public Movie getMovie(long movieId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

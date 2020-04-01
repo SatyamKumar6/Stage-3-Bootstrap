@@ -1,4 +1,4 @@
-package com.cognizant.moviecruiser.controller;
+package com.cognizant.truyum.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,34 +11,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cognizant.moviecruiser.dao.FavoritesDaoSqlImpl;
-import com.cognizant.moviecruiser.dao.FavoritesEmptyException;
-import com.cognizant.moviecruiser.dao.MovieDaoSqlImpl;
-import com.cognizant.moviecruiser.model.Movie;
+
+import com.cognizant.truyum.dao.CartDaoSqlImpl;
+import com.cognizant.truyum.dao.CartEmptyException;
+import com.cognizant.truyum.dao.MenuItemDaoSqlImpl;
+import com.cognizant.truyum.model.MenuItem;
 
 @Controller
-public class UserController {
+public class userController {
 	
 	@Autowired
-	MovieDaoSqlImpl movieDaoSqlImpl;
+	MenuItemDaoSqlImpl menuItemDaoSqlImpl;
 	
 	@Autowired
-	FavoritesDaoSqlImpl favDaoSqlImpl;
+	CartDaoSqlImpl cartDaoSqlImpl;
 	
-	static List<Movie> listcust;
+	static List<MenuItem> listcust;
 	
 	@RequestMapping(value = {"/showPage","/menu-item-list-customer"}, method = RequestMethod.GET)
 	public String getMainPage(ModelMap model)
 	{
-	 listcust=movieDaoSqlImpl.getMovieListCustomer();
+	 listcust=menuItemDaoSqlImpl.getMenuItemListCustomer();
 		model.put("inf", listcust);
-		return "menu_item_list_customer";
+		return "menu-item-list-customer";
 	}
 	
 	@RequestMapping(value = {"/admin","menu-item-list-admin"}, method = RequestMethod.GET)
 	public String getadminPage(ModelMap model)
 	{
-		List<Movie> list=movieDaoSqlImpl.getMovieListAdmin();
+		List<MenuItem> list=menuItemDaoSqlImpl.getMenuItemListAdmin();
 		model.put("inf", list);
 		return "menu-item-list-admin";
 	}
@@ -46,69 +47,68 @@ public class UserController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String toEditMovie(@RequestParam int id,ModelMap model)
     {
-		model.addAttribute("editMovie", new Movie());
-		model.addAttribute("Movieid",id);
+		model.addAttribute("editItem", new MenuItem());
+		model.addAttribute("itemId",id);
 		return "edit-menu-item";
     }
 	
-	@RequestMapping(value = "showfavorite",method = RequestMethod.GET)
+	@RequestMapping(value = "cart",method = RequestMethod.GET)
 	public String showFav(ModelMap model)
 	{
-		List<Movie> list = null;
+		List<MenuItem> list = null;
 		try {
-			list = favDaoSqlImpl.getAllFavoritesMovies(1);
-		} catch (FavoritesEmptyException e) {
+			list = cartDaoSqlImpl.getAllCartItems(1);
+		} catch (CartEmptyException e) {
 			// TODO Auto-generated catch block
 			model.put("inf", listcust);
-			return "menu_item_list_customer";
+			return "menu-item-list-customer";
 		}
 		model.put("inf", list);
-		return "favorite";
+		return "cart";
 	}
 	
-	@RequestMapping(value = "/favorite",method=RequestMethod.GET)
+	@RequestMapping(value = "/addToCart",method=RequestMethod.GET)
 	public String addedToFav(@RequestParam int id,ModelMap model)
 	{
 		int userId=1;
-		favDaoSqlImpl.addFavoritesMovie(userId, id);
+		cartDaoSqlImpl.addCartItem(userId, id);
 		model.put("inf", listcust);
-		return "menu_item_list_customer";
+		return "menu-item-list-customer";
 	}
 		
 	@RequestMapping(value = "/edit-menu-item-success", method = RequestMethod.POST)
-    public String successEditMovie(@ModelAttribute("editMovie") Movie movie,ModelMap model)
+    public String successEditMovie(@ModelAttribute("editMovie") MenuItem menu,ModelMap model)
     {
 	
-		movieDaoSqlImpl.modifyMovie(movie);
+		menuItemDaoSqlImpl.modifyMenuItem(menu);
 		return "edit-menu-item-success";
     }
 	
 	@RequestMapping(value = "deleteItem", method = RequestMethod.GET)
 	public String deleteItem(@RequestParam int id , ModelMap model)
 	{
-		favDaoSqlImpl.removeFavoritesMovie(1, id);
-		List<Movie> list = null;
+		cartDaoSqlImpl.removeCartItem(1, id);
+		List<MenuItem> list = null;
 		try {
-			list = favDaoSqlImpl.getAllFavoritesMovies(1);
-		} catch (FavoritesEmptyException e) {
+			list = cartDaoSqlImpl.getAllCartItems(1);
+		} catch (CartEmptyException e) {
 			// TODO Auto-generated catch block
 			model.put("inf", listcust);
-			return "menu_item_list_customer";
+			return "menu-item-list-customer";
 		}
 		model.put("inf", list);
-		return "favorite";
+		return "cart";
 	}
 	
-	@ModelAttribute("genreList")
+	@ModelAttribute("categoryList")
 	public List<String> sourceListGenerator() {
 		List<String> list =new ArrayList<String>();
-		list.add("Science Fiction");
-		list.add("Superhero");
-		list.add("Romance");
-		list.add("Comedy");
-		list.add("Adventure");
-		list.add("Thriller");
+		list.add("Main Course");
+		list.add("Starter");
+		list.add("Dessert");
+		
 		return list;
 	}
+
 
 }

@@ -21,6 +21,7 @@ public class FavoritesDaoSqlImpl {
 	
 	@Transactional
 	public void addFavoritesMovie(int userId, int movieId) {
+		int id=(int)favoriteDao.count();
 		Favorites fav=new Favorites(userId,movieId);
 		favoriteDao.save(fav);
 		

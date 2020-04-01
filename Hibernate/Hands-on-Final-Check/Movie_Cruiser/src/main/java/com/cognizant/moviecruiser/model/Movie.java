@@ -1,6 +1,5 @@
 package com.cognizant.moviecruiser.model;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
