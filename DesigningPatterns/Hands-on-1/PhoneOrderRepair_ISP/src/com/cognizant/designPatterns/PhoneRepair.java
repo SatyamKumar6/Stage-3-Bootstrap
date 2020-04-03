@@ -1,6 +1,6 @@
 package com.cognizant.designPatterns;
 
-public class PhoneRepair implements IPhoneRepair {
+public class PhoneRepair implements IPhoneRepair{
 
 	@Override
 	public void ProcessPhoneRepair(String modelName) {

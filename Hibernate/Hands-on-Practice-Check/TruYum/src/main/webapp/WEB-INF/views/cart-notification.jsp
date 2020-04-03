@@ -37,7 +37,7 @@ footer{
   bottom: 0;
   position: absolute;
     width: 100%;
-    background-color: #ff3300;
+    background-color: #ff7700;
     height:40px;
 color: white;
 margin-top: 10px;
@@ -83,7 +83,7 @@ padding-left: 10px;
 </head>
 <body>
     <nav class="navbar navbar-dark htrack">
-       <div class="navbar-brand title"><img class="logo" src="truyum-logo-light.png"> truYum</div>
+       <div class="navbar-brand title">truYum</div>
 
        <div class="navbar-expand-md">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

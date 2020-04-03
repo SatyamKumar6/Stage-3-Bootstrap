@@ -20,7 +20,7 @@ padding-left: 20px;
 background-color:#33cccc;
 }
 .log{
-background-color:#9999FF;
+background-color:#FFFFFF;
 }
 
 .material-icons {
